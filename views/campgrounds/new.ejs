@@ -2,26 +2,36 @@
 <div class="row ">
     <div class="text-center">New Campground</div>
     <div class="col-lg-6 offset-3 mb-5  ">
-        <form action="/campgrounds" method="POST">
+        <form action="/campgrounds" method="POST" novalidate class="form-validation">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="campground[title]">
+                <input class="form-control" type="text" id="title" name="campground[title]" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please enter a valid response</div>
             </div>
             <div class="mb-3">
                 <label class="form-labbel" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="campground[location]">
+                <input class="form-control" type="text" id="location" name="campground[location]" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please enter a valid response</div>
             </div>
             <div class="mb-3">
                 <label class="form-labbel" for="image">Image</label>
-                <input class="form-control" type="text" id="image" name="campground[image]">
+                <input class="form-control" type="text" id="image" name="campground[image]" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please enter a valid response</div>
             </div>
             <div class="mb-3">
                 <label class="form-labbel" for="price">Price</label>
-                <input class="form-control" type="text" id="price" name="campground[price]">
+                <input class="form-control" type="text" id="price" name="campground[price]" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please enter a valid response</div>
             </div>
             <div class="mb-3">
                 <label class="form-labbel" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="campground[description]"></textarea>
+                <textarea class="form-control" type="text" id="description" name="campground[description]" required></textarea>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please enter a valid response</div>
             </div>
             <button class="btn btn-success mt-3 mb-3" type="submit">Add New </button>
         </form>

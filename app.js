@@ -9,13 +9,15 @@ const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const { campgroundSchema, reviewSchema } = require('./schemas.js');
 const Review = require('./models/review.js');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const campgrounds = require('./routes/campgrounds'); 
 const reviews = require('./routes/reviews');
 
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
-    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false, 
 })
 const app = express();
 
@@ -30,7 +32,26 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 
+const sessionConfig = {
+    secret: 'mySecret...',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 86400,
+        maxAge: 86400,
+    }
+}
+app.use(session(sessionConfig));
+app.use(flash()); 
+
+app.use((req, res, next)=>{
+     res.locals.success = req.flash('success');
+    //  res.locals.error = req.flash('error');
+     next(); 
+})
 
 app.use('/campgrounds', campgrounds);
 app.use('/campgrounds/:id/reviews', reviews)

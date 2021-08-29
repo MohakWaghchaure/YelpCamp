@@ -15,8 +15,11 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-const campgrounds = require('./routes/campgrounds'); 
-const reviews = require('./routes/reviews');
+const userRoutes = require('./routes/users');
+const campgroundRoutes = require('./routes/campgrounds'); 
+const reviewRoutes = require('./routes/reviews');
+
+
 const { getMaxListeners } = require('./models/review.js');
 
 
@@ -70,8 +73,9 @@ app.get('/testUser', async (req, res)=> {
     res.send(newUser);
 })
 
-app.use('/campgrounds', campgrounds);
-app.use('/campgrounds/:id/reviews', reviews)
+app.use('/', userRoutes);
+app.use('/campgrounds', campgroundRoutes);
+app.use('/campgrounds/:id/reviews', reviewRoutes);
 
 
 app.get('/', (req, res)=>{

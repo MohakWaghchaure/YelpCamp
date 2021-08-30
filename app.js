@@ -63,7 +63,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next)=>{
      res.locals.success = req.flash('success');
-    //  res.locals.error = req.flash('error');
+     res.locals.error = req.flash('error');
      next(); 
 });
 
@@ -79,7 +79,7 @@ app.use('/campgrounds/:id/reviews', reviewRoutes);
 
 
 app.get('/', (req, res)=>{
-    res.render('home');
+    res.redirect('/campgrounds');
 });
 
 app.all('*', (req, res, next)=>{
